@@ -2,277 +2,643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Management System</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventEase | Event Management System</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        body {
-            background: #f4f6fb;
-            color: #222;
-        }
+body {
+    background: #f5f6fc;
+    color: #252544;
+}
 
-        header {
-            background: #24245c;
-            color: white;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+header {
+    background: #252544;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
-        header h1 {
-            font-size: 25px;
-        }
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-        }
+.logo span {
+    color: #a99cff;
+}
 
-        nav a:hover {
-            color: #ffcf70;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 14px;
+}
 
-        .hero {
-            text-align: center;
-            padding: 65px 20px;
-            background: linear-gradient(135deg, #24245c, #6969c9);
-            color: white;
-        }
+nav a:hover {
+    color: #c5baff;
+}
 
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
-        }
+.hero {
+    padding: 65px 8%;
+    color: white;
+    background: linear-gradient(120deg, #252544, #6355b7);
+}
 
-        .hero p {
-            font-size: 17px;
-            margin-bottom: 25px;
-        }
+.hero .tag {
+    color: #e1d9ff;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
 
-        .hero a {
-            display: inline-block;
-            background: #ffcf70;
-            color: #24245c;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.hero h1 {
+    font-size: 42px;
+    margin: 18px 0;
+    max-width: 650px;
+}
 
-        .container {
-            padding: 40px 8%;
-        }
+.hero p {
+    line-height: 1.8;
+    max-width: 570px;
+    color: #eeeeff;
+}
 
-        .container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #24245c;
-        }
+.primary-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 22px;
+    border-radius: 7px;
+    background: #f5c76a;
+    color: #252544;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
 
-        .events {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-        }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 25px 8%;
+    background: white;
+}
 
-        .event-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px #00000012;
-            transition: transform 0.2s;
-        }
+.stat {
+    padding: 12px;
+    text-align: center;
+}
 
-        .event-card:hover {
-            transform: translateY(-5px);
-        }
+.stat h2 {
+    color: #6656b9;
+    font-size: 27px;
+}
 
-        .event-image {
-            height: 145px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 55px;
-        }
+.stat p {
+    color: #777;
+    font-size: 13px;
+    margin-top: 6px;
+}
 
-        .purple { background: #e5e2ff; }
-        .orange { background: #ffead8; }
-        .green { background: #dff5e6; }
+.container {
+    padding: 45px 8%;
+}
 
-        .event-info {
-            padding: 20px;
-        }
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
 
-        .event-info h3 {
-            margin-bottom: 12px;
-            color: #24245c;
-        }
+.section-heading h2 {
+    font-size: 27px;
+}
 
-        .event-info p {
-            margin: 8px 0;
-            color: #555;
-            font-size: 14px;
-        }
+.search-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
 
-        button {
-            margin-top: 15px;
-            padding: 11px;
-            width: 100%;
-            border: none;
-            background: #24245c;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 15px;
-        }
+input, select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: white;
+    font-size: 14px;
+}
 
-        button:hover {
-            background: #44449a;
-        }
+#search {
+    flex: 1;
+    min-width: 200px;
+}
 
-        .about {
-            background: white;
-            padding: 35px 8%;
-            text-align: center;
-            line-height: 1.8;
-        }
+.events {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+}
 
-        footer {
-            background: #24245c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
+.event-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #2525440d;
+    border: 1px solid #eee;
+    transition: 0.2s;
+}
 
-        #message {
-            text-align: center;
-            color: #16733b;
-            margin-top: 20px;
-            font-weight: bold;
-        }
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px #25254418;
+}
 
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-            }
+.event-art {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 58px;
+}
 
-            nav a {
-                margin: 0 7px;
-            }
+.art1 { background: #e9e5ff; }
+.art2 { background: #ffeadb; }
+.art3 { background: #dff5e7; }
+.art4 { background: #ffe2ed; }
 
-            .hero h2 {
-                font-size: 28px;
-            }
-        }
-    </style>
+.event-content {
+    padding: 20px;
+}
+
+.category {
+    display: inline-block;
+    background: #eeebff;
+    color: #5b4ba8;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+.event-content h3 {
+    margin-bottom: 12px;
+}
+
+.event-content p {
+    font-size: 13px;
+    color: #686878;
+    margin: 9px 0;
+}
+
+.event-content button, .submit-btn {
+    width: 100%;
+    background: #6355b7;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 12px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.event-content button:hover, .submit-btn:hover {
+    background: #49408d;
+}
+
+.empty {
+    padding: 30px;
+    text-align: center;
+    color: #777;
+    grid-column: 1 / -1;
+}
+
+.about {
+    padding: 40px 8%;
+    text-align: center;
+    background: white;
+    line-height: 1.8;
+}
+
+.about p {
+    max-width: 750px;
+    margin: 15px auto 0;
+    color: #666;
+}
+
+footer {
+    background: #252544;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #0009;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+    z-index: 10;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    width: 100%;
+    max-width: 430px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-box h2 {
+    margin-bottom: 8px;
+}
+
+.modal-box p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.modal-box label {
+    display: block;
+    font-size: 13px;
+    margin: 12px 0 6px;
+}
+
+.modal-box input, .modal-box select {
+    width: 100%;
+}
+
+.close-btn {
+    float: right;
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#notice {
+    text-align: center;
+    margin-top: 20px;
+    color: #197345;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .hero h1 { font-size: 32px; }
+    nav a { margin-left: 9px; }
+    .stats { padding: 20px 3%; }
+    .stat h2 { font-size: 22px; }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>EventEase</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#events">Events</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+<header>
+    <div class="logo">Event<span>Ease.</span></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#events">Events</a>
+        <a href="#about">About</a>
+    </nav>
+</header>
 
-    <section class="hero" id="home">
-        <h2>Discover. Register. Participate.</h2>
-        <p>Find exciting events and manage your registrations in one place.</p>
-        <a href="#events">Explore Events</a>
-    </section>
+<section class="hero" id="home">
+    <div class="tag">YOUR EVENTS, SIMPLIFIED</div>
+    <h1>Make every event an experience to remember.</h1>
+    <p>
+        Discover college events, workshops and cultural programs.
+        Explore events and register easily from one place.
+    </p>
+    <a href="#events" class="primary-btn">Explore Events &rarr;</a>
+</section>
 
-    <section class="container" id="events">
-        <h2>Upcoming Events</h2>
+<section class="stats">
+    <div class="stat">
+        <h2 id="eventCount">4</h2>
+        <p>Available Events</p>
+    </div>
+    <div class="stat">
+        <h2 id="registrationCount">0</h2>
+        <p>Your Registrations</p>
+    </div>
+    <div class="stat">
+        <h2>24/7</h2>
+        <p>Browse Anytime</p>
+    </div>
+</section>
 
-        <div class="events">
+<section class="container" id="events">
+    <div class="section-heading">
+        <h2>Explore Events</h2>
+        <span>Find something exciting!</span>
+    </div>
 
-            <div class="event-card">
-                <div class="event-image purple">💻</div>
-                <div class="event-info">
-                    <h3>Tech Fest 2026</h3>
-                    <p>Date: 20 November 2026</p>
-                    <p>Venue: College Auditorium</p>
-                    <p>Category: Technology</p>
-                    <button onclick="registerEvent('Tech Fest 2026')">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+    <div class="search-area">
+        <input id="search" type="text"
+            placeholder="Search events by name or venue...">
 
-            <div class="event-card">
-                <div class="event-image orange">🎨</div>
-                <div class="event-info">
-                    <h3>Creative Workshop</h3>
-                    <p>Date: 25 November 2026</p>
-                    <p>Venue: Seminar Hall</p>
-                    <p>Category: Workshop</p>
-                    <button onclick="registerEvent('Creative Workshop')">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+        <select id="categoryFilter">
+            <option value="All">All Categories</option>
+            <option value="Technology">Technology</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Sports">Sports</option>
+        </select>
+    </div>
 
-            <div class="event-card">
-                <div class="event-image green">🎤</div>
-                <div class="event-info">
-                    <h3>Cultural Night</h3>
-                    <p>Date: 5 December 2026</p>
-                    <p>Venue: College Ground</p>
-                    <p>Category: Cultural</p>
-                    <button onclick="registerEvent('Cultural Night')">
-                        Register Now
-                    </button>
-                </div>
-            </div>
+    <div class="events" id="eventList"></div>
+    <p id="notice"></p>
+</section>
 
-        </div>
+<section class="about" id="about">
+    <h2>About EventEase</h2>
+    <p>
+        EventEase is a simple Event Management System that helps
+        participants explore events and register for activities.
+        It also helps organizers present event information in one place.
+        The system is designed to make event discovery and registration
+        easy and convenient.
+    </p>
+</section>
 
-        <p id="message"></p>
-    </section>
+<footer>
+    <p>&copy; 2026 EventEase | Event Management System</p>
+    <p style="margin-top:8px;">Designed for a college software engineering project.</p>
+</footer>
 
-    <section class="about" id="about">
-        <h2>About EventEase</h2>
-        <p>
-            EventEase is an Event Management System designed to simplify
-            event organization and participant registration. It provides
-            a single platform to explore events, view event details,
-            and register for activities.
-        </p>
-    </section>
+<div class="modal" id="registrationModal">
+    <div class="modal-box">
+        <button class="close-btn" onclick="closeForm()">&times;</button>
+        <h2>Event Registration</h2>
+        <p id="selectedEvent"></p>
 
-    <footer>
-        <p>&copy; 2026 EventEase | Event Management System</p>
-    </footer>
+        <form id="registrationForm">
+            <label for="participantName">Full Name</label>
+            <input id="participantName" required
+                placeholder="Enter your full name">
 
-    <script>
-        function registerEvent(eventName) {
-            const participant = prompt(
-                "Enter your name to register for " + eventName + ":"
-            );
+            <label for="participantEmail">Email Address</label>
+            <input id="participantEmail" type="email" required
+                placeholder="Enter your email">
 
-            if (participant && participant.trim() !== "") {
-                document.getElementById("message").textContent =
-                    "Thank you, " + participant.trim() +
-                    "! Your registration request for " +
-                    eventName + " has been received.";
-            }
+            <label for="participantPhone">Phone Number</label>
+            <input id="participantPhone" type="tel" required
+                pattern="[0-9]{10}" maxlength="10"
+                placeholder="10-digit mobile number">
+
+            <button class="submit-btn" type="submit">
+                Confirm Registration
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+const events = [
+    {
+        id: 1,
+        name: "Tech Fest 2026",
+        date: "2026-11-20",
+        venue: "College Auditorium",
+        category: "Technology",
+        icon: "💻",
+        art: "art1",
+        description: "Explore technology, coding and innovation."
+    },
+    {
+        id: 2,
+        name: "Creative Workshop",
+        date: "2026-11-25",
+        venue: "Seminar Hall",
+        category: "Workshop",
+        icon: "🎨",
+        art: "art2",
+        description: "Learn new skills through interactive sessions."
+    },
+    {
+        id: 3,
+        name: "Cultural Night",
+        date: "2026-12-05",
+        venue: "College Ground",
+        category: "Cultural",
+        icon: "🎤",
+        art: "art4",
+        description: "Celebrate music, dance and campus talent."
+    },
+    {
+        id: 4,
+        name: "Sports Tournament",
+        date: "2026-12-12",
+        venue: "College Sports Ground",
+        category: "Sports",
+        icon: "🏆",
+        art: "art3",
+        description: "Join exciting sports and team competitions."
+    }
+];
+
+let selectedEventId = null;
+
+function getRegistrations() {
+    try {
+        return JSON.parse(localStorage.getItem("eventEaseRegistrations")) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function displayDate(dateString) {
+    return new Date(dateString + "T12:00:00")
+        .toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        });
+}
+
+function renderEvents() {
+    const searchText = document.getElementById("search")
+        .value.toLowerCase().trim();
+
+    const category = document.getElementById("categoryFilter").value;
+    const eventList = document.getElementById("eventList");
+
+    const filtered = events.filter(event => {
+        const matchesSearch =
+            event.name.toLowerCase().includes(searchText) ||
+            event.venue.toLowerCase().includes(searchText);
+
+        const matchesCategory =
+            category === "All" || event.category === category;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    eventList.innerHTML = "";
+
+    if (filtered.length === 0) {
+        eventList.innerHTML =
+            '<div class="empty">No events found. Try another search.</div>';
+    }
+
+    filtered.forEach(event => {
+        const card = document.createElement("article");
+        card.className = "event-card";
+
+        const art = document.createElement("div");
+        art.className = "event-art " + event.art;
+        art.textContent = event.icon;
+
+        const content = document.createElement("div");
+        content.className = "event-content";
+
+        const badge = document.createElement("span");
+        badge.className = "category";
+        badge.textContent = event.category;
+
+        const title = document.createElement("h3");
+        title.textContent = event.name;
+
+        const description = document.createElement("p");
+        description.textContent = event.description;
+
+        const date = document.createElement("p");
+        date.textContent = "📅 " + displayDate(event.date);
+
+        const venue = document.createElement("p");
+        venue.textContent = "📍 " + event.venue;
+
+        const button = document.createElement("button");
+        button.textContent = "Register Now";
+        button.addEventListener("click", () => openForm(event.id));
+
+        content.append(badge, title, description, date, venue, button);
+        card.append(art, content);
+        eventList.appendChild(card);
+    });
+
+    document.getElementById("eventCount").textContent = events.length;
+    document.getElementById("registrationCount").textContent =
+        getRegistrations().length;
+}
+
+function openForm(eventId) {
+    selectedEventId = eventId;
+
+    const event = events.find(item => item.id === eventId);
+    const modal = document.getElementById("registrationModal");
+
+    document.getElementById("selectedEvent").textContent =
+        "Register for: " + event.name;
+
+    document.getElementById("notice").textContent = "";
+    document.getElementById("registrationForm").reset();
+
+    modal.style.display = "flex";
+}
+
+function closeForm() {
+    document.getElementById("registrationModal").style.display = "none";
+}
+
+document.getElementById("registrationForm").addEventListener("submit",
+    function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("participantName")
+            .value.trim();
+
+        const email = document.getElementById("participantEmail")
+            .value.trim().toLowerCase();
+
+        const phone = document.getElementById("participantPhone")
+            .value.trim();
+
+        const registrations = getRegistrations();
+
+        const duplicate = registrations.some(registration =>
+            registration.eventId === selectedEventId &&
+            registration.email === email
+        );
+
+        if (duplicate) {
+            alert("This email is already registered for this event.");
+            return;
         }
-    </script>
+
+        const registration = {
+            eventId: selectedEventId,
+            eventName: events.find(item =>
+                item.id === selectedEventId).name,
+            name: name,
+            email: email,
+            phone: phone,
+            registeredAt: new Date().toISOString()
+        };
+
+        registrations.push(registration);
+
+        try {
+            localStorage.setItem(
+                "eventEaseRegistrations",
+                JSON.stringify(registrations)
+            );
+        } catch (error) {
+            alert("Could not save registration in this browser.");
+            return;
+        }
+
+        closeForm();
+        renderEvents();
+
+        document.getElementById("notice").textContent =
+            "Registration saved successfully for " +
+            registration.eventName + "!";
+
+        window.scrollTo({
+            top: document.getElementById("events").offsetTop,
+            behavior: "smooth"
+        });
+    }
+);
+
+document.getElementById("search")
+    .addEventListener("input", renderEvents);
+
+document.getElementById("categoryFilter")
+    .addEventListener("change", renderEvents);
+
+document.getElementById("registrationModal")
+    .addEventListener("click", function (event) {
+        if (event.target === this) closeForm();
+    });
+
+renderEvents();
+</script>
 
 </body>
 </html>
